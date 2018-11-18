@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterContentInit, ContentChild } from '@angul
 import { NgModel } from '@angular/forms';
 
 @Component({
-    selector: 'mt-input-content',
+    selector: 'mt-input-container',
     templateUrl: './input.component.html'
 })
 export class InputComponent implements OnInit, AfterContentInit {
@@ -21,7 +21,7 @@ export class InputComponent implements OnInit, AfterContentInit {
     public ngAfterContentInit(): void {
         this.input = this.model;
         if (!this.input) {
-            throw new Error('Este componente necessita que seja passado um NgModel.');
+            throw new Error('Esse componente precisa ser usado com a diretiva ngModel.');
         }
     }
 
