@@ -1,0 +1,334 @@
+Curso: https://www.udemy.com/angular-pt/learn/v4/content
+Repositório no github: https://github.com/WanderSF/curso-meat-app-starter
+GitHub do Cod3er Cursos: https://github.com/cod3rcursos/meat-app-starter
+
+Duvida:
+   sobre a relação em modulos
+   sobre a declaração de component, rotting e service na modulo
+
+- Aplicação de delivery de comida, que eu chamei de MEAT
+- A aplicação usa como base o Bootstrap e o template open-source AdminLTE
+- Vamos usar as duas formas de implementar formulários: Template Forms e Reactive forms
+- Vamos usar os principais recursos do Angular como componentes, diretivas e pipes
+- Vou te mostrar como implementar componentes de formulário e integrá-los com as diretivas do Angular. Você também vai aprender a dividir sua aplicação em módulos e configurá-los para carregamento tardio
+- Ainda vou falar de Reactive Programming, Animações e como realizar o deploy em um dos servidores mais comuns da Web, que é o Apache HTTP Server
+- Introdução ao Typescript com os principais pontos para você tirar o melhor proveito do Angular
+
+Criar uma aplicação usando recursos do Angular como Componentes, Diretivas e Pipes
+Consumir Web Services REST usando os serviços Http e HttpClient
+Usar eventos para Comunicação entre Componentes
+Usar HttpInterceptors para Enviar Headers de Autorização automaticamente
+Usar Route Guards para Proteger Componentes na Aplicação
+Criar Formulários com Template Forms e Reactive Forms
+Usar Validadores Padrões e Personalizados para Formulários
+Criar Módulos e Carregá-los de Forma Tardia (Lazy-Loading)
+Usar Operadores de RxJS para Implementar Buscas Sofisticadas de Forma Simples
+Realizar Autenticação Simples em uma Aplicação Angular
+RxJS 6 e o novo operador "pipe" (Angular 6)
+Criar Componentes com Angular Elements (Angular 6)
+
+------------------------------ Sessão 1 - Apresentação
+
+----- Apresentação do curso
+ Vamos utilizar recursos do Angular como componentes, diretivas e pipes. Aprender sobre modulos, consumir uma API REST, reactive programming e implementar formulários com template forms e reactive forms. Comunicação entre componentes e criação de componentes reutilizaveis e a integrar esses componentes com as diretivas de formulário do Angular. Introdução ao Typescript e utilizar a versão 4 do Angular.
+
+------------------------------ Sessão 2 - Introdução
+
+----- Escolha da linguagem
+ O Angular pode ser usado com as linguagens:
+  Com o JavaScript atual q é o EcmanScript5, EcmanScript 2015, TypeScript e com Dart. Vamos usar o TypeScript.
+
+----- Instalando as ferramentas
+ Instalar o nodeJS, ele é bastante usado para aplicações ServerSide, mas vamos usar o npm(node packeg menagement) para gerenciar as nossas dependências, no caso o angular será um dependência do projeto.
+ Instalar o Angular-cli: npm install -g @angular/cli        - Ele vai ajudar a criar componentes, classes, services e outros. O -g informa q a instalação é global, ou seja, o angular cli não vai ficar disponível só na pasta de instalação.
+ Para ver a versão instalada do angular-cli: ng -v
+ 
+------------------------------ Sessão 3 - Vamos Falar Sobre Typescript
+
+----- Declaração de variáveis
+ let name: string
+ let name: "fulano"
+ boolean, number, string e any(usado para a adoção gradativa ao TS)
+ let players: number[] = [1,2,3]
+ let players: Array<number> = [1,2,3]
+ let players: [1,2,3] - inferindo o tipo
+
+----- Configuração e primeiro exemplo
+ Ele usa o Atom como editor de código. Ele instala o plug-in atom-typescript. Vai mostrar como compilar o código TS como o atom e com o TS.
+ Quando começar um projeto TS do zero é importante criar o arquivo tsconfig.json. Ele vai conter as configurações básicas do compilador.
+ Se deixar em branco, o compilador vai adotar as configurações padrões, como por exemplo, os arquivos TS serão gerados no msm diretorio do arquivo TS.
+ Para instalar o compilador do TS executar o comando: npm install typescript -g
+ Para ver a versão instalada: tsc -v
+ Para compilar um arquivo: tsc app.ts
+ Para deixar o compilador esperando por mudanças para compilar os arquivos: tsc -w
+ Também temos um comando para criar o arquivo tsconfig.json já com algumas configurações: tsc --init
+ Além do comando tsc -w, no VS Code podemos apertar Crtl+Shift+B e escolher a opção "tsc: watch - tsconfig.json" para compilar os arquivos autamaticamente
+ 
+----- Importando uma biblioteca em JS
+ Executar o comando "npm init -f" na pasta raiz do projeto. O "-f" serve para forçar as opções padrões pq não temos mto o q configurar nesse projeto. 
+ Será criado o arquivo package.json que é um arquivo de configuração do node e vai conter as configurações da nossa aplicação e também as configurações das dependencias.
+ Para instalar o lodash executar o comando "npm install --save lodash@4.14". O "--save" diz que essa biblioteca será usada em desenvolvimento e em runtime. O "@4.14" informa a versão a ser instalda.
+ Será acrescentado no arquivo package.jon a informação sobre essa dependencia. Será criado a pasta "node_modules" com o conteudo do lodash.
+ Executar o comando "npm install --save-dev @types/lodash@4.14" para importar as definições de tipo do lodash. O "--save-dev" diz q será usado apenas no desenvolvimento. 
+ Será adicionado a dependencia de desenvolvimento no arquivo package.json e é criado uma nova pasta dentro de node-modules com o novo conteudo.
+ As "definições de tipos" são importantes pois com elas o compilador do typescript passa a conhecer a biblioteca e assim podemos usar o autocomplite e a verificação se  estamos passando os parametros corretos por exemplo.
+
+------------------------------ Sessão 4 - Primeira Aplicação
+
+----- Gerando a Primeira Aplicação
+ Executar o seguinte comando para criar o projeto: ng new jedi-academy --prefix=jad
+ A estrutura da aplicação será criada dentro da pasta jedi-academy e serão baixados os pacotes utilizados pelo Angular. O prefisso padrão será o "jad" que será utilizado no nome de todos os componentes a serem criados no projeto.
+ Para verificar se deu tudo certo e executar o projeto, entrar na pasta do projeto e executar: ng server 
+
+----- Conhecendo a Estrutura Gerada
+ O estrutura do projeto segue o padrão do node.
+ O package.json vai ter configurações do projeto e também listar as dependencias.
+ O angular.json é o arquivo de coniguração do angular-cli. 
+ O webpack é uma biblioteca JS responsável por criar bundles na aplicação. Ele vai compilar os arquivos e separa-los em bundles especificos. Que são:
+ 	Polyfills - Uma série de scripts adicionados para aumentar a compatibiilidade com os browsers antigos.
+ 	Main      - Os scripts da aplicação.
+ 	Styles    - Todos os arquivos de css do projeto que serão processados pelo webpack.
+ 	Vendor    - Vai conter scripts de terceiros.
+ 	Inline    - O script utilizado para carregar o webpack no browser e carregar toda essa estrutura para q o angular seja inicializado no navegador.
+ O styles.css é um local onde podemos colocar todos os estilos globais da aplicação.
+ O polyfills.ts podemos incluir scrits pra dar suporte a foncionalidades novas em browsers antigos.
+
+----- Compreendendo a Configuração e o Bootstrap
+ Quando damos um ng server ou npm start estamos startando um servidor interno do webpack chamado de live development server. O webpack irá invertigar todos os arquivos começando pelo main.ts e buscando todos os imports, scripts e dependencias. Depois irá separa-los nos bundles.
+ Depois as referencias para os scripts são injetadas no index.html. O main.bundle.js vai startar o primeiro componente, o bootstrap.
+ Start da aplicação: O bootstrap carrega o arquivo main.ts, que carrega o modulo principal(app.module.ts), o modulo principal diz qual é o componente de bootstrap(app.component.ts), o angular vai pegar o template do componente de bootstrap(app.component.html) e colocar no conteudo do index.html.
+
+----- O que é um Componente?
+ São perquenas partes independentes e reusaveis. No Angular, são classes que possuem um determinado ciclo de vida, tem um template pra definir a aparencia e um selector(que é a TAG) para ser usado em outras partes da aplicação.
+ Uma página é composta por partes menores que podem funcionar de forma independente ou comunicarem entre si através de eventos. Os componentes são dispostos na estrutura de arvore, onde na raiz há sempre um component parent seguido dos seus filhos.
+ A classe de um componente precisar ser definida com o "export" para q ela possa ser referenciada pr outros arquivos de configuração exigidos pelo framework. Quando marcamos com "export" ela passa a ser um EcmanScript 2015.
+ Para informar o nome da TAG que queremos usar com esse componente usamos o decorator @Component. No decorator precisamos informar o "selector" que é a TAG e o "templateUrl" que informa o template que esse componente vai ter.
+ O template pode ser um outro arquivo, sendo informado no "templateUrl" pelo caminho relativo, caminho absoluto ou uma url http. Ou pode ser inline quando o conteudo for pequeno, podemos usar o template strings do ES 2015.
+ Templates podem ter expressões que resolvem as propriedades dos componentes, isso é chamado de template interpolation.
+ Também temos que informar ao Angular a qual modulo o componente pertence. O modulo Angular é responsável por saber quais componentes, serviços, pipes e diretivas fazem parte da aplicação. Se a declaração for feita no modulo raiz, toda a app tem acesso ao componente.
+
+----- Primeiro Componente com Angular-Cli
+ Executar o comando: ng generate component header --spec=false
+ O "generate component" pode ser abreviado para "g c". O "header" é o nome do componente e o "--spec=false" indica que não é preciso ser gerado o arquivo de teste do componente.
+ O angular-cli também já incluir a referencia a este componente no "declarations" do decorator do modulo app.module.ts.
+
+----- Passando valores a um componente e Usando o Decorator @Input
+ Para passar valores para um componente, na TAG onde vamos chama-lo acrescentamos um parametro com o nome do atributo a ser referenciado e o seu valor. Podemos colocar esse parametro também com o Property Binding ou o Template Interpolation para passar um valor dinânimo.
+ E na classe do componente importamos o "input" e anotamos o atributo com "@Input()", também podemos trocar o nome pelo qual esse atributo será referenciado colocando o nome entre os parenteses.
+ Outra forma de dizer quais atributos irão receber valores é com o atributo "inputs" no decorator "@Components".
+ Sempre que o valor a ser passado não for uma string precisamos usar o formato de Property Binding.
+
+----- O que são Diretivas
+ Uma diretiva simples serve para add comportamento a um elemento do DOM. Componentes tbm são diretivas, só que com template. Temos três tipos de diretivas:
+ Diretivas Componentes.
+ Diretivas estruturais, que mudam o template e a estrutura do DOM, como o ngIf e o ngFor. Tem também o ngSwitch, ngSwitchCase e ngSwitchDefault.
+ Diretivas atributos, onde vc associa um atributo a um elemento do DOM e um comportamento é aplicado a ele.
+
+----- Usando o operador de Navegação Segura
+ Para envitar erros relacionados com undefined no console podemos verificar se o objeto existe com "ngIf="student"" ou colocar um "?" em cada local onde o objeto está sendo utilizado.
+
+----- Evetos de um Componente
+ Colocamos parenteses entorno do nome do evento e no valor colocamos o nome do método que será chamado. Podemos também passar p proprio evento como parametro da função colocando "metodoChamado($event)".
+
+----- Emitindo eventos em um Componente
+ Podemos fazer com que nossos componentes tenham eventos através da classe eventemitter que é um adapter pra biblioteca rxjs e possui o metodo "emit" que chamamos no momento de emitir o evento.
+ Temos que importar na classe do componente, Output e EventEmitter. Depois declaramos o evento: @Output() myEvent = new EventEmitter()
+ clicked(): void { this.myEvent.emit() }
+
+ Podemos também adicionar referencia a elementos do DOM ou a componentes com uma coisa chamada de variáveis de ambiente.
+ Colocamos "#nomeDaReferencia" tendo da TAG e assim podemos utilizar essa referencia dentro do tamplete ou passar isso para um método caso necessário. Com essa referencia podemos acessar atributos e também métodos do elemento.
+
+------------------------------ Sessão 5 - Projeto do Curso (Aplicação MEAT)
+
+----- Baixando o projeto inicial
+ https://github.com/cod3rcursos/meat-app-starter
+ git clone https://github.com/cod3rcursos/meat-app-starter.git
+ cd meat-app-starter	npm install	ng serve
+
+----- Criando as primeiras Rotas
+ Ainda não vamos trabalhar com modulos de rotiamento, pois ainda não conhecemos alguns conceitos do angular como o service. Então deixaremos as rotas separadas em um arquivo específico até falarmos sobre modulos.
+  - Cria as rotas adicionando o arquivo "app.routes.ts" dentro de app com o código: export const ROUTES: Routes = [ { path: '', component: HomeComponent }, { path: 'about', component: AboutComponent } ];
+  - Configurar as rotas em "app.module.ts", no "imports" adiciona "RouterModule.forRoot(ROUTES)".
+  - Adiciona a TAG "router-outlet" no local onde o conteudo dos componentes deve aparecer.
+  - Nos link's que direcionaram para as rotas criadas colocamos: [routerLink]="['/about']"
+  - Se os link's estão em um menu, podemos colocar a diretirva "routerLinkActive="active"" para indicar que a classe "active" será aplicada quando o link estiver selecionado.
+
+----- o que é Injeção de Dependência?
+ Se trata de deixar que o framework gerencie a instanciação das nossas dependências e que ele a disponibilize para o uso em nossos componentes.
+ Exemplo: o componente MyComponente depende do seviço MyService. Em vez de instanciarmos o serviço no contrutor do componente, apenas receberemos o serviço como parametro.
+ Com isso, caso o MyService dependa de outros objetos, o nosso componente não precisa se preocurar com isso, pois será gerenciado pelo framework. Outra vantagem é que o código fica mais testavel e mais limpo.
+ Para deixar um serviço disponível para ser injetado em um componente é preciso declara-lo na lista de providers de um componente ou modulo. Se for no componente, uma instancia do serviço fica disponível para o componente e seus filhos, mas se for declarado no modulo o serviço fica disponível para todos os componentes da aplicação.
+
+----- O que são Serviços?
+ São classes comuns em Angular que você pode usar para injetar em componentes e em outros serviços. Eles são usados geralmente para acessar API's de backend.
+ Eles podem ser singleton, isso quer dizer que são ótimos candidatos para guardar dados compartilhados por toda a aplicação, mas tambémm podem guardas apenas para uma parte da aplicação.
+ Podemos declarar um serviço e três escopos:
+  - Modulo Angular: Os serviços declarados na lista de providers do modulo raiz fica disponível para todas as classes declaradas nesse msm modulo, isso inclui componentes e outros serviços. Todos vão usar a mesma instancia do serviço. Para outros modulos existem algumas particularidades que discutiremos quando falarmos sobre modulos.
+  - Componentes e Componentes Filhos: Se declarado na lista de providers de um componente, o serviço ficará disponível para o componentes e seus filhos.
+  - Somente Componente: Se declarado a lista de viewProviders de um componente, o serviço fica disponível apena para ele e não para os filhos.
+ Serviços também podem solicitar a injeção de outros serviços, para isso eles devem usar o decorator @Injectable. O @Injectable só é necessário para o serviço receber injeções do framework.
+ Alguns serviços que o angular disponibiliza são: o title, o http e o router. O title é um serviço para obter e alterar o titulo de uma página.
+
+----- Criando a Classe de Serviço para Restaurants
+ Criou uma classe chamada RestaurantsService, colocou um construtor vazio, criu um método chamado restaurants() que vai retornar um array de Restaurants.
+ Na classe do componente Restaurants, no método construtor colocou o seguinte parametro de entrada "private restaurantsService: RestaurantsService".
+ No método ngOnInit acessamos o método do serviço e colocamos o retorno no atributo que será usado no template, da seguinte forma: this.restaurants = this.restaurantsService.restaurants();
+ No providers do modulo principal colocamos o RestaurantsService.
+
+----- Reactive Programming e Http
+ Reactive Programming: Ou seja programação reativa, é simple, um evento acontece, e os que estão interessados são notificados e reagem a ele. É baseado em um padrão bem comum da web chamado observer.
+ No reactive programming os eventos vem em forma streaming, ou seja, uma sequencia de eventos que podem ser modificados e até transformados em uma nova cadeia de eventos. Então cada evento que acontece gera uma notificação para os objetos interessados.
+ É portanto a combinação de dois padrões, "iterator" porque vai item a item na streaming e "observer" porque notifica os listeners interessados.
+ A biblioteca que o Angular usa pra RP é a RXJS. O objeto principal do RXJS é o "observable", ele possui uma série de funções ou operadores para inscrição e manipulação de eventos, eles são bem parecidos com funções do Array. O "map" serve para transformar os itens, o "filters" serve para filtralos e o "subscribe" é mto similar ao "foreach".
+
+----- Configurando a API de Backend (json-server)
+ Para utilizar o HTTP vamos moca uma API de backend, que no caso será o JSON-SERVER. Instalar globalmente com o comando na pasta raiz do projeto: npm install -g json-server.
+ Para startar o processo utilizamos: json-server db.json
+
+----- Adicionando HTTP ao Serviço de Restaurantes
+ Criamos uma constante para representar a URL do serviço. Para isso criamos o arquivo "app.api.ts" dentro da pasta "app". E colocamos o código: export const MEAT_API = 'http://localhost:3000'
+ Para injetar o serviço http precisamos anotar a classe de serviço com o @Injectable().
+ Injetamos o serviço http no construtor do serviço: private http: Http
+ Toda requisição vai retornar um objeto Observable<reponse>. O Observable é o objeto principal da biblioteca RXJS e contem funções e operadores para manipulação de eventos, o "response" é a resposta de forma crua, que pode ser o status, a mensagem de erro ou os dados esperados.
+ Então o retorno do método será: Observable<Restaurants[]>
+ E vamos utilizar o operador map para transforma o "response" em um array de restaurants. Para utilizar o map precisamos importar manualmente com: impor 'rxjs/add/operator/map'
+ O método fica assim: return this.http.get(`${MEAT_API}/restaurants`).map(response => response.json())
+ A requisição só é feita quando implementamos o subscribe, então o colocamos na chamada do serviço. Nele colocamos uma função que será chamada para cada dado que chegar, como se fosse um foreach.
+ this.restaurantsService.restaurants().subscribe(restaurantsRetornados => this.restaurants = restaurantsRetornados)
+ Essa chamda é assincrona.
+
+----- Tratamento de Erros com o Operator Catch
+ Tem duas formas de tratar erros no Angular. Uma delas é implementando uma interface ErroHandler e criando uma classe que faz tratamento de erro global. Então vamos configurar essa classe como um provider da aplicação e a outra forma é utilizando o operador catch do Observable, que é o q faremos.
+ Primeiro importamos: import 'rxjs/add/operator/catch'
+ O método catch espera uma função que espera um response e devolve um outro Observable. Sempre que temos um erro numa sequencia de streamings, o observable vai ser fechado, então teremos uma chance de logar o erro mas teremos que devolver um outro observable.
+ E esse outro observable, iremos decidir se queremos trocar por uma outra sequencia ou se vamos disparar um erro.
+ Vamos criar uma função estática em uma classe capaz de tratar erros para aproveitar em outros catch's. Criamos o arquivo app.error-handler.ts dentro de app.
+ Essa função vai receber um objeto do tipo Response ou any.
+ Se error instanceof Response vamos montar uma mensagem mais legivel para o usuário: `Erro ${error.status} ao acessar a URL ${error.url} - ${error.statusText}`
+ Se não, apenas: errorMessage = error.toString(). Depois logamos o erro: console.log(errorMessage). E retornamos o novo Observable: return Observable.throw(errorMessage)
+ Fazemos o import: import 'rxjs/add/observable/throw'
+ Chamamos essa função no catch do subscribe: ErrorHandler.handleError
+
+----- Parametrizando as Rotas
+ Na criação da rota parametrizamos o caminho assim: {path: 'restaurant/:id', component: RestaurantComponent}
+ Para passar o link continuamos usando a diretiva routerLink que aceita um array de parametros: <a [routerLink]="['/restaurant', restaurant.id]">teste</a>
+ Temos duas formas de pegar o valor dos parametros, com snapshot, que é uma fotografia dos parametros no momento em que acessamos e é o mais utilizado, e a outra é com subscribe,
+ se inscrevendo na rota e esperando a mudança de parametros, é util quando o componente que chama as diferentes url's e o componente que é atualizado continuam ativos na tela e o que é atualizado precisa se atualizar a cada clique.
+ Para as duas formas precisamos injetar a dependencia: private route: ActivatedRoute
+ Com o snapshot pegamos da seguinte forma: const id = this.route.snapshot.params['id']
+ Com o subscribe: this.route.params.subscribe( params => { const id = params['id'];	this.myObject = service.buscar(id) } )
+
+----- Rotas Filhas para Avaliações e Menu
+ Podemos criar rotas filhas para uma rota. Assim como um componente é reenderizado em um router-outlet, os filhos tbm serão reenderizados dentro do componente em seu router-outlet.
+ { path: 'restaurants/:id', component: RestaurantDetailComponent,
+        children: [ { path: '', pathMatch: 'full', redirectTo: 'menu' }, { path: 'menu', component: MenuComponent }, { path: 'reviews', component: ReviewsComponent } ]}
+
+----- O que são Pipes?
+ São responsáveis por transformações de dados para uma apresentação diferente. São equivalentes a filtros no Angular 1.
+ Com ele conseguimos transformar uma string em uppercase ou lowercase, formatar números, moedas, datas, limitar o tamanho de um array ou até mesmo formatar um conteudo json.
+ uppercase, lowercase, json, 0.5 | percent, date: 'dd/MM/yyyy', currency: 'BRL', true (moeda, se usar simbolo, formato do número), slice: 0:4 (limita string ou array).
+
+----- Implementando o Componente de Avaliações - Pipes Async e Date
+ Como estamos em um componente filho, para pegar o id do resraturante em que estamos precisamos acessar os parametros da URL do componente pai(ou seja, parent): this.route.parent.snapshot.params['id']
+ Para mostrar a utilização do Pipe Async, não vamos usar o subscribe na chamada do serviço. O serviço foi criado da mesma forma, porém retorna Observable<any>.
+ Fez a injeção de dependencia. Criou uma propriedade chama reviews do tipo Observable<any>.
+ Dentro do ngOnInit fez a chamada ao serviço e atribuiu à propriedade: this.reviews = this.restaurantsServico.reviewsOfRestaurant(this.route.parent.snapshot.params['id'])
+ No template colocou o ngFor junto com o pipe async: *ngFor="let review of reviews | async"
+ O pipe async vai fazer um subscribe pra gente, pegar os dados e iterar sobre eles. O código tbm fica mais limpo.
+
+----- Implementando os Itens de Menu - Pipe Currency
+ Para avisar ao componente pai que o link de adicionar foi clicado:
+ No link coloca esse código, que vai chamar o método que emiti o evento de adicionar: (click)="emitAddEvent()"
+ Criamos a seguinte propriedade para conseguirmos emitir um evento para o componente pai: @Output() add = new EventEmitter();
+ Criamos o seguinte método que irá emitir um evento para o componente pai e passando os dados dele mesmo, para o pai saber quem foi clicado: emitAddEvent() { this.add.emit(this.menuItem); }
+ Onde chamamos o componente filho colocamos o seguinte código para que ao receber o evento, esse componente chame o seu método "addMenuItem" passando o objeto recebido: (add)="addMenuItem($event)"
+ Criamos o método no componente para fazer alguma coisa: addMenuItem(item: menuItem) { console.log(item) }
+
+----- Implementando o Carrinho de Compras
+ Criamos um serviço para armazenar os dados em memória.
+ Este Service terá uma lista de CartItem. CartItem terá um ItemMenu e a guantidade como atributos, e um métodos "total" que retorna a multiplização do preço daquele item pela quantodade add ao carrinho.
+ Este Service também terá os métodos addItem, removeItem, clear e total. Cria métodos de acesso as funcionalidades do serviço na classe ShoppingCartComponent.
+ No html do ShoppinCartComponent chama o método aplicando o pipe currency: {{ total() | currency: 'BRL': true }}
+
+----- Aplicando Eventos no Carrinho de Compras
+ No botão limpar coloca o evento click para chamar o método "clear" do componente que chama o método no service.
+ Adiciona uma nova coluna na tabela do carrinho para colocar icones de deletar o item. Este icone está em um link que tem o evento click que chama o método removeItem do componente passando o item.
+ No template do MenuComponent colocamos uma variavel de template no import do mt-shopping-cart. No evento "add" que está no import mt-menu-item colocamos: (add)="shoppingCart.addItem($event)"
+ Dessa forma ao clicarmos no "adicionar" do item de menu, o evento será acionado e será chamado o método addItem do ShoppingCartComponent.
+
+----- Localizando Preços Para a Moeda Brasileira
+ No arquivo polyfills.ts adicionamos os imports:
+	import 'intl'
+	import 'intl/locale-data/jsonp/pt-BR.js'
+ No modulo principal import o token LOCALE_ID junto do NgModule.
+ Na lista de providers vamos alterar o valor da localização utilizando esse token: {provide: LOCALE_ID, useValeu: 'pt-BR'}
+
+------------------------------ Sessão 6 - Formulários e Componentes Personalizados
+
+----- O que são Template Forms
+ É uma forma declarativa de configurar os formulários no template do componente. A gente usa a diretiva NgModel nos inputs que devem ser controlados pelo angular.
+ Todas as tags "form" já tem a diretiva NgForm de forma inplicita. Com essa diretiva podemos obter validade, valor e status(dirty, pristine e touched) do form.
+ Precisamos colocar ngModel nos inputs e o "name" é obrigatório. Também podemos usar one-way binding ou two-way binding no NgModel: [ngModel]="myVariable" ou [(ngModel)]="myVariable"
+ Também podemos acessar propriedades do forma atravéz de Template Variable: 
+	Atribuímos o ngForm a uma variavle de template: <form #myForm="ngForm">
+	Desabilitamos um button com uma propriedade do form: <button [desabled]="myForm.invalid" />
+
+----- Criando o Componente de Compra
+ Cria o componente order, coloca o template, cria a rota e a coloca no fechar pedido do ShoppingCart.
+
+----- Usando Template Forms na Compra
+ Colocamos "novalidate" na tag do form para que a forma de validação seja delegada ao angular e não aos navegadores, pois cada um apresenta de uma forma.
+ Importa o FormsModule no modulo principal da aplicação.
+ Cria uma template variable e associa o ngForm a ela para printar o seu valid e value na tela.
+ Coloca o name dos 3 campos de endereço e o ngModel.
+
+----- Validação com Template Forms
+ O ngModel disponibiliza os seguintes estados: valid e invalid, pristine(campo não alterado) e dirty(campo alterado, não volta para pristine), touched e untouched (acessado ou não)
+ Colocamos uma Template Variable para o ngModel, assim podemos acessar os estados daquele campo em outros lugares: #inputName="ngModel"
+ Podemos utilizar os seguintes validadores nos campos: required, pattern(regex), minlength e maxlength
+ Para ajudar a dar feedback visual ao usuário o angular associa aos campos e ao form as classes css ng-valid, ng-invalid, ng-pristine, ng-dirty, ng-untouched e ng-touched.
+
+----- Aplicando Validação no Formulário de Compra
+ Retira o auto-complete do adress e do number com: autocomplete="off"
+ Colocar o required nesses dois campos e coloca minlength de 5 no adress.
+ Usando property binding, desabilita o botão de concluir pedido: [desabled]="!form.valid"
+
+----- Aplicando Feedback Visual ao Formulário de Compra
+ Criou uma Template Variable para o input adress: #iptAdress="ngModel"
+ Podemos aplicar classes baseados em uma expressão booleana: [class.has-success]="iptAdress.valid && (iptAdress.dirty || iptAdress.touched)"  [class.has-error]="!iptAdress.valid && (iptAdress.dirty || iptAdress.touched)"
+ Ele cria as variaveis de template para os dois primeiros campos, aplica as classes conforme a expressão e controla a exibição do texto de "ok" e "obrigatório" com ngIf e a mesma lógica.
+
+----- Criando um Componente de Input (Content Projection)
+ Criou uma pasta "shared", criou o componente input lá dentro e levou o código do input para o componente. Mas agora o form deixou de enchergar o imput, para resolver isso temos duas saidas:
+	Podemos transformar o componente em um Component Container, onde será aplicado apenas o estilo visual e o component parent passa o input do tipo text. Isso é chamado de Content Projection.
+	Ou deixamos o componente isolado e implementamos a interface Control Value Accessor que serve de ponte entre as diretivas usadas de apoio ao formulário, como ngModel e o nosso próprio componente.
+ A primeira opção é mais interessante neste caso, pois aplicamos somente recursos visuais ao input. Para implementar o Content Projection:
+	No template do componente criado, tiramos a tag input e colocamos a tag ng-content. Mudamos o selector do componente para mt-input-container, para ficar mais coerente.
+	Criamos um atributo chamado input que receberá a referencia ao NgModel do campo que for passado. No template, onde tinhamos referencia a Template Variable, passaremos a usar o atributo input.
+	Criamos atributos que terão seus valores parametrizados e serão usados no template. Como: @Input() label: string; e @Input() errorMessage: string;
+	Criamos um atributo com o ContentChild(referencia uma diretiva ou elemento) que receberá uma referencia ao NgModel do input passado, esse atributo é do tipo NgModel: @ContentChild(NgModel) model: NgModel;
+	Para atribuirmos o atributo "model" ao atributo "input" implementamos a interface AfterContentInit que será executada assim que o conteúdo a ser passado for definido.
+	No método AfterContentInit atribuimos um atributo ao outro, e ser o "input" continuar undefined, lançamos um Error: throw new Error('Esse componente precisa ser usado com a diretiva ngModel')
+	Na chamada do componente, passamos os parametros e o valor, que no casso é um input que precisar ter o ngModel.
+	Criamos também métodos na classe do componente que retornarão o resultado das expressões e usamos os métodos no template.
+
+----- Validação com Expressões Regulares
+ Em angular usamos esse tipo de validação junto com o atributo "pattern" das tag's HTML, queremos apenas números: <input pattern="^[0-9]*$" >
+ Alteramos a mensagem para "Obrigatório e somente números" e passamos o tamanho da div para 3 para não quebrar a mensagem.
+
+----- Criando Componente Usando ControlValueAccessor (Parte 1)
+ Criou o component Radio, colocou o html, criou um model RadioOption para ter chave e valor das opções. 
+ Criou uma lista de RadioOption que receberá valores parametrizados, um atributo value do tipo any para guardar o valor selecionado e um método para receber o valor selecionado da tela e atribuir ao atributo value.
+ No template, um ngFor percorre a lista. Com Template Interpolation o label é printado. No click, é chamado o método "setValue" passando o value do option. 
+ Com Property Binding aplicamos a classe "checked" quando o valor selecionado for igual ao valor desse componente. Ao utilizar o componente, passamos a lista de RadioOption.
+
+----- Criando Componente Usando ControlValueAccessor (Parte 2)
+ Vamos implementar a interface ControlValueAccessor que fara uma ponte enter o nosso componente e as diretivas de formulário como ngModel ou as do Reactive Forms.
+ Implementamos a interface ControlValueAccessor, ela tem 4 métodos, as precisamos apenas do writeValue onde atribuimos o valor recebido ao atributo value do componente,
+ e o registerOnChange onde atribuimos a função recebida para uma função interna(public onChange: any;), e chamamos essa função quando o valor for alterado passando o valor.
+ Agora registramos nosso componente como um Value Accessor para ficar disponível para ser usado junto com a diretiva ngModel e as do ReactiveForms, Colocamos no @Component:
+	providers: [{        provide: NG_VALUE_ACCESSOR,        useExisting: forwardRef(() => RadioComponent),        multi: true    }]
+ Ao usar o componente podemos agora colocar o name e o ngModel.
+
+----- Implementando o Componente com os Itens da Compra
+ 
