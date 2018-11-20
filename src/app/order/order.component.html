@@ -2,92 +2,71 @@
 </section>
 
 <section class="content">
-  <section class="invoice">
+    <section class="invoice">
 
         <form #form="ngForm" novalidate>
-          <div class="row">
-            <div class="col-xs-12">
-              <h2 class="page-header">
-                <i class="fa fa-shopping-cart"></i> Finalize o seu pedido
-              </h2>
-            </div>
-          </div>                
-
-          <div class="row invoice-info">
-            <div class="col-xs-12">
-              <p class="lead">Endereço de Entrega:</p>
-            </div>
-            <div class="col-sm-6 col-xs-12">
-                <mt-input-container label="Endereço" errorMessage="Campo obrigatório e com 5 caracteres!">
-                    <input type="text" class="form-control" name="address" required minlength="5" ngModel autocomplete="off" placeholder="Endereço">
-                </mt-input-container>
-            </div>
-            <div class="col-sm-3 col-xs-6">
-                <mt-input-container label="Número" errorMessage="Obrigatório e somente números!">
-                    <input type="text" class="form-control" name="number" required pattern="^[0-9]*$" ngModel autocomplete="off" placeholder="Número">
-                </mt-input-container>
-            </div>
-            <div class="col-sm-3 col-xs-6">
-                <mt-input-container label="Complemento">
-                    <input type="text" class="form-control" name="optional" ngModel autocomplete="off" placeholder="Complemento">
-                </mt-input-container>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12">
-              <p class="lead">Itens do Pedido:</p>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="page-header">
+                        <i class="fa fa-shopping-cart"></i> Finalize o seu pedido
+                    </h2>
+                </div>
             </div>
 
-            <mt-order-itens [itemsCart]="itemsCart()"
-                    (increaseQty)="increaseQty($event)"
-                    (decreaseQty)="decreaseQty($event)"
-                    (remove)="remove($event)"></mt-order-itens>
-            
-          </div>
-          <!-- /.row -->
+            <div class="row invoice-info">
+                <div class="col-xs-12">
+                    <p class="lead">Endereço de Entrega:</p>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <mt-input-container label="Endereço" errorMessage="Campo obrigatório e com 5 caracteres!">
+                        <input type="text" class="form-control" name="address" required minlength="5" ngModel
+                            autocomplete="off" placeholder="Endereço">
+                    </mt-input-container>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <mt-input-container label="Número" errorMessage="Obrigatório e somente números!">
+                        <input type="text" class="form-control" name="number" required pattern="^[0-9]*$" ngModel
+                            autocomplete="off" placeholder="Número">
+                    </mt-input-container>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <mt-input-container label="Complemento">
+                        <input type="text" class="form-control" name="optional" ngModel autocomplete="off" placeholder="Complemento">
+                    </mt-input-container>
+                </div>
+            </div>
 
-          <div class="row">
-            <!-- accepted payments column -->
-            <div class="col-sm-6 col-xs-12">
-                <p class="lead">Formas de Pagamento:</p>
-                <div class="form-group">
-                    <mt-radio [options]="getRadioOption()" name="paymentOption" ngModel></mt-radio>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="lead">Itens do Pedido:</p>
                 </div>
 
+                <mt-order-itens [itemsCart]="itemsCart()" (increaseQty)="increaseQty($event)" (decreaseQty)="decreaseQty($event)"
+                    (remove)="remove($event)"></mt-order-itens>
             </div>
-            <!-- /.col -->
-            <div class="col-sm-6 col-xs-12">
-              <p class="lead">Frete e Total:</p>
 
-              <div class="table-responsive">
-                <table class="table">
-                  <tbody><tr>
-                    <th style="width:50%">Itens:</th>
-                    <td class="text-right">R$ 20,00</td>
-                  </tr>
-                  <tr>
-                    <th>Frete:</th>
-                    <td class="text-right">R$ 8,00</td>
-                  </tr>
-                  <tr>
-                    <th>Total:</th>
-                    <td class="text-right">R$ 28,00</td>
-                  </tr>
-                </tbody></table>
-              </div>
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <p class="lead">Formas de Pagamento:</p>
+                    <div class="form-group">
+                        <mt-radio [options]="getRadioOption()" name="paymentOption" required ngModel></mt-radio>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xs-12">
+                    <p class="lead">Frete e Total:</p>
+                    <mt-delivery-costs [itemsValue]="itemsValue()" [delivery]="delivery"></mt-delivery-costs>                    
+                </div>
             </div>
-            <!-- /.col -->
-          </div>
 
         </form>
 
         <div class="row">
-          <div class="col-xs-12">
-            <button [disabled]="!form.valid" class="btn btn-success pull-right">
-                <i class="fa fa-credit-card"></i> Concluir Pedido
-            </button>
-          </div>
+            <div class="col-xs-12">
+                <button [disabled]="!form.valid || itemsCart().length === 0" class="btn btn-success pull-right">
+                    <i class="fa fa-credit-card"></i> Concluir Pedido
+                </button>
+            </div>
         </div>
 
     </section>

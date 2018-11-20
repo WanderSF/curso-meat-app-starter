@@ -9,6 +9,8 @@ import { OrderService } from './order.service';
 })
 export class OrderComponent implements OnInit {
 
+    public delivery = 8;
+
     constructor(private orderService: OrderService) { }
 
     ngOnInit() { }
@@ -20,6 +22,10 @@ export class OrderComponent implements OnInit {
         radioOptions.push(new RadioOption('Cartão Refeição', 'REF'));
 
         return radioOptions;
+    }
+
+    public itemsValue(): number {
+        return this.orderService.itemsValue();
     }
 
     public itemsCart(): ItemCart[] {

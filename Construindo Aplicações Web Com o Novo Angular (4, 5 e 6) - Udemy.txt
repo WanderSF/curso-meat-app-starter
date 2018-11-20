@@ -339,4 +339,8 @@ Criar Componentes com Angular Elements (Angular 6)
  Os métodos sáo criados na ShoppingCartService. Cria os métodos na OrderComponent que tbm vão ser apenas encapsulamentos. Passa os items para o componente filho e coloca os eventos no componente.
 
 ----- Criando o Componente de Total de Compra
+ Criou o DeliveryCostsComponente, colocou o hotml, criou atributos de entrada itemsValue e delivery, o método total e printou na tela. No componente parent expos os métodos dos services.
+ Colocou o componente de forma de pagamento como required e o botão de fechar pedido sendo habilitado somente se haver itens na lista.
+
+----- Finalizando a Compra (Http POST)
  
