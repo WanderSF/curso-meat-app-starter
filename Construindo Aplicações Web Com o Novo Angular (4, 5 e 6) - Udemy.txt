@@ -332,7 +332,11 @@ Criar Componentes com Angular Elements (Angular 6)
 
 ----- Implementando o Componente com os Itens da Compra
  Criou um novo componente chamado OrderItem, com atributo de entrada itemsCart do tipo ItemCart[], os atributos de saida increaseQty, decreaseQty e remove do tipo EventEmitter, criou os métodos para emitir tais eventos passando o item.
- Iterou a lista na tela printando os valores. Colocou os métodos no click dos link's.
+ Iterou a lista na tela printando os valores. Colocou os métodos no click dos link's. Colocou ngIf para controlar a exibição da mensagem que não tem itens na lista.
 
 ----- Fornecendo os Itens da Compra
+ Cria o OrderService que injeta o ShoppingCartService. Implementa os métodos increaseQty, decreaseQty, remove e itemsCart que servem apenas para encapsular os métodos que estão na ShoppingCartService.
+ Os métodos sáo criados na ShoppingCartService. Cria os métodos na OrderComponent que tbm vão ser apenas encapsulamentos. Passa os items para o componente filho e coloca os eventos no componente.
+
+----- Criando o Componente de Total de Compra
  

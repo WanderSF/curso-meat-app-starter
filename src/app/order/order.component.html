@@ -39,7 +39,10 @@
               <p class="lead">Itens do Pedido:</p>
             </div>
 
-            <mt-order-itens></mt-order-itens>
+            <mt-order-itens [itemsCart]="itemsCart()"
+                    (increaseQty)="increaseQty($event)"
+                    (decreaseQty)="decreaseQty($event)"
+                    (remove)="remove($event)"></mt-order-itens>
             
           </div>
           <!-- /.row -->
