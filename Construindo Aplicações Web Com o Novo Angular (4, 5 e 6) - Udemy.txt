@@ -1,4 +1,4 @@
-Curso: https://www.udemy.com/angular-pt/learn/v4/content
+﻿Curso: https://www.udemy.com/angular-pt/learn/v4/content
 Repositório no github: https://github.com/WanderSF/curso-meat-app-starter
 GitHub do Cod3er Cursos: https://github.com/cod3rcursos/meat-app-starter
 
@@ -331,4 +331,8 @@ Criar Componentes com Angular Elements (Angular 6)
  Ao usar o componente podemos agora colocar o name e o ngModel.
 
 ----- Implementando o Componente com os Itens da Compra
+ Criou um novo componente chamado OrderItem, com atributo de entrada itemsCart do tipo ItemCart[], os atributos de saida increaseQty, decreaseQty e remove do tipo EventEmitter, criou os métodos para emitir tais eventos passando o item.
+ Iterou a lista na tela printando os valores. Colocou os métodos no click dos link's.
+
+----- Fornecendo os Itens da Compra
  
