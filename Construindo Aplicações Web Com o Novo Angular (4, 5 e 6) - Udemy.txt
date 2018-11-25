@@ -343,4 +343,19 @@ Criar Componentes com Angular Elements (Angular 6)
  Colocou o componente de forma de pagamento como required e o botão de fechar pedido sendo habilitado somente se haver itens na lista.
 
 ----- Finalizando a Compra (Http POST)
- 
+ Cria o método checkOrder(valueForm: Order) e o chama no click do botão de fechar pedido passando o objeto que representa o formulário: (click)="checkOrder(form.value)"
+ Cria a classe OrderItem que contém o id do item do pedido e a quantidade. Cria a classe Order que terá os mesmos campos que o formulário e mais uma lista de OrderItem. Colocou as duas no mesmo arquivo e com um unico export: export {Order, OrderItem}
+ No método checkOrder que já está recebendo os dados do form e fazendo o cast para Order, precisamos atribuir também a lista de itens para o objeto Order. Essa lista não está sendo passada pelo form, mas já temos ela no componente:
+	order.orderItens = this.itemsCart().map(item: ItemCart => new OrderItem(item.quatity, item.menuItem.id));
+ Criamos um método no OrderService que receberá o objeto da compra e o enviará para o back-end via POST, e irá retornar um Observable<string> que irá conter o id gerado para aquela compra.
+ Na requisição POST iremos passar como parametros a url do serviço, a representação textual do objeto em JSON, e os headers que informam para o servidor o tipo de conteudo que estamos enviando:
+	const headers = new Headers();
+	headers.append('Content-Type:', 'application/json');
+	return this.http.post(`${MEAT_API}/orders`, JSON.stringiFy(order), new RequestOptions({ headers: headers }).map(response => response.json());
+ No método checkOrder do componente chamamos o método do service e fazemos a requisição ao se inscrever como método subscribe. Também limpamos o carrinho, o método clear está pronto em cartService mas precisa ser chamado no orderService:
+	this.orderService.checkOrder(order).subscribe((idGerado: string) => {
+		console.log(`Compra comcluida: ${idGerado}`);
+		this.orderService.clear();
+	});
+
+----- 

@@ -370,5 +370,43 @@
       "restaurantId": "tasty-treats"
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "address": "Minha Casa",
+      "number": "219",
+      "optionalAddress": "Granja Catavento",
+      "paymentOption": "DEB",
+      "orderItems": [
+        {
+          "quantity": 2,
+          "id": "cup-cake"
+        },
+        {
+          "quantity": 2,
+          "id": "bread"
+        },
+        {
+          "quantity": 4,
+          "id": "cup"
+        },
+        {
+          "quantity": 2,
+          "id": "sunday"
+        },
+        {
+          "quantity": 2,
+          "id": "burger"
+        },
+        {
+          "quantity": 2,
+          "id": "fries"
+        },
+        {
+          "quantity": 2,
+          "id": "coke.png"
+        }
+      ],
+      "id": 1
+    }
+  ]
 }
