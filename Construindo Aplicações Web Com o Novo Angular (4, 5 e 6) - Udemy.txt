@@ -358,4 +358,9 @@ Criar Componentes com Angular Elements (Angular 6)
 		this.orderService.clear();
 	});
 
+----- Navegação Programatica via Router
+ O serviço de salvar pedido retorna o objeto completo para o método checkOrder, queremos retornar para o subscribe apenas a string com o id gerado, então fazemos um segundo map: .map(orderRetorned => orderRetorned.id)
+ No subscribe redirecionamos para a tela de confirmação do pedido, para isso injetamos a diretiva Router: this.router.navigate(['/order-summary'])
+ Criamos o componente OrderSummary e a rota para o mesmo.
+
 ----- 
