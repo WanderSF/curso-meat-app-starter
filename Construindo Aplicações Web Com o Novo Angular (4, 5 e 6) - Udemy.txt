@@ -363,4 +363,15 @@ Criar Componentes com Angular Elements (Angular 6)
  No subscribe redirecionamos para a tela de confirmação do pedido, para isso injetamos a diretiva Router: this.router.navigate(['/order-summary'])
  Criamos o componente OrderSummary e a rota para o mesmo.
 
------ 
+----- Criando um Componente de Rating
+ Criou o RatingCoponent no shared. Copiou os icones de estrela do OrderSummary para o template.
+ Criou os o array ratings com valores de 1 a 5 que serão as chaves das estrelas. O atributo rating para identificar até qual está marcada. 
+ O atributo temporaryRate para quardar qual estrela está cliclada enquanto enquanto aplica os efeitos de passar o mouse. E o rated para emitir evento quando clicar em um estrela.
+ O método setRate recebe o valor da estrela clicada: this.rate = rate;  this.temporaryRate = undefined;  this.rated.emit(this.rate);
+ O método setTemporaryRate recebe o valor da estrela clicada: if (this.temporaryRate === undefined) { this.temporaryRate = this.rate; } this.rate = rate;
+ O método clearTemporaryRate: if (this.temporaryRate !== undefined) { this.rate = this.temporaryRate; this.temporaryRate = undefined; }
+ No template percorremos a lista. Aplicamos as classes conforme o rate. Definimos os valores do rate através dos eventos.
+ <i *ngFor="let r of ratings" class="fa" [class.fa-star]="r <= rate" [class.fa-star-o]="r > rate" (click)="setRate(r)" (mouseenter)="setTemporaryRate(r)" (mouseleave)="clearTemporaryRate()"></i>
+ No template do OrderSummary colocamos o evento (rated)="rated = true" para que ao ser emitido, possamos mostrar a mensagem: <p [hidden]="!rated">Obrigado pela sua avaliação!</p>
+
+------------------------------ Sessão 7 - 
