@@ -374,4 +374,26 @@ Criar Componentes com Angular Elements (Angular 6)
  <i *ngFor="let r of ratings" class="fa" [class.fa-star]="r <= rate" [class.fa-star-o]="r > rate" (click)="setRate(r)" (mouseenter)="setTemporaryRate(r)" (mouseleave)="clearTemporaryRate()"></i>
  No template do OrderSummary colocamos o evento (rated)="rated = true" para que ao ser emitido, possamos mostrar a mensagem: <p [hidden]="!rated">Obrigado pela sua avaliação!</p>
 
------------------------------- Sessão 7 - 
+------------------------------ Sessão 7 - Reactive Forms
+
+----- O que são Reactive Forms
+ A nova forma forma do Angular implementar formuários. Ao invés de usar NgModel e configurar validadores nos campos, vamos criar instancias de  FormGroup ou FormControl dentro de um componente.
+ O form é apresentado por FormGroup que vai agrupar um ou mais campos dentro dele, para ajudar nessa tarefa o Angular desponibiliza o objeto FormBuilder que ajuda na criação dos campos e outros grupos. 
+ O FormBuilder tem o método group que recebe como parametro um objeto com propriedades que representam cada campo do form.
+ Podemos atribuir valores para esses campos diretamente (username: 'teste') ou this.fb.control('teste').
+ Os validadores podem ser passados em um array ao criar o formControl: username: this.fb.control('teste', [Validators.required, Validators.minlength(3)])
+ Equivalente a Template Forms, o Reactive Forms tem os validadores padrões required, minlength, maxlength e pattern, todos declarados com funções estáticas da classe Validators.
+ Se tivermos campos que fazem sentido ser agrupados, podemos fazer isso com underFormGroup. A vantagem é que podemos aplicar validadores ao nível do grupo para validar valores entre os componentes.
+ No template, o form será associado ao grupo do componente através da diretiva formGroup e cada componente será associado com o formControlName. Podemos associar o grupo com a diretiva formGroupName.
+ O grupo também é associado com classes CSS para facilitar o feedback visual.
+
+----- Refatorando a Aplicação para Reactive Forms
+ Adicionamos a dependência de ReactiveFormsModule na lista de imports do app.module.ts
+ Cria uma propriedade na classe do componente para representar todo o formulário: orderForm: FormGroup
+ Injeta o formBuilder: private formBuilder: FormBuilder
+ No OnInit montamos o formulário com seus campos, mas ainda não colocamos as validações: this.orderForm = this.formBuilder.group({ name: this.formBuilder.control('') });
+ Como não usaremos mais o NgForm, no InputComponent adicionamos outro decorator ContentChild para pegar o FormControlName: @ContentChild(FormControlName) control: FormControlName;
+ E no método ngAfterContentInit atribuimos um dos dois atributos ao atributo input q é quem está sendo usado: this.input = this.model || this.control;
+ No template alteramos de #form="NgForm" para [formGroup]="orderForm". Alteramos as propriedades "name" para "formControlName" e retiramos as validações. Mudamos as referencias de "form" para "orderForm".
+
+----- 
