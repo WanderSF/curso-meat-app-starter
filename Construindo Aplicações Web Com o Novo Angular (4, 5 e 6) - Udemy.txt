@@ -396,4 +396,9 @@ Criar Componentes com Angular Elements (Angular 6)
  E no método ngAfterContentInit atribuimos um dos dois atributos ao atributo input q é quem está sendo usado: this.input = this.model || this.control;
  No template alteramos de #form="NgForm" para [formGroup]="orderForm". Alteramos as propriedades "name" para "formControlName" e retiramos as validações. Mudamos as referencias de "form" para "orderForm".
 
------ 
+----- Validação com Reactive Forms
+ Acrescentamos os validadores na criação de cada componente do grupo. Para isso usamos a classe Validators que tem os métodos required, minLength, maxLength e pattern.
+ name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]), email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)])
+
+----- Criando Validadores Personalizados
+ 
