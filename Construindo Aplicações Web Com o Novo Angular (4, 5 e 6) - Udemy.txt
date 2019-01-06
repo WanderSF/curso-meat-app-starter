@@ -2,10 +2,6 @@
 Repositório no github: https://github.com/WanderSF/curso-meat-app-starter
 GitHub do Cod3er Cursos: https://github.com/cod3rcursos/meat-app-starter
 
-Duvida:
-   sobre a relação em modulos
-   sobre a declaração de component, rotting e service na modulo
-
 - Aplicação de delivery de comida, que eu chamei de MEAT
 - A aplicação usa como base o Bootstrap e o template open-source AdminLTE
 - Vamos usar as duas formas de implementar formulários: Template Forms e Reactive forms
@@ -445,4 +441,12 @@ Criar Componentes com Angular Elements (Angular 6)
  Dai seria necessário reestruturar a aplicação para corrigir o problema. Por isso é recomendado ciar um core module para ter todos os providers de serviços e esse módulo só ser importado no módulo raiz.
 
 ----- Adicionando Serviços a um Módulo Compartilhado
+ Mostra uma técnica(ModuleWithProviders) para não precisar do modulo core, o módulo share assume a responsabilidade dele.
+ O Angular possui o objeto ModuleWithProviders que permite importar um módulo de forma diferente, uma hora com os providers e uma hora sem.
+ Dessa forma vamos retirar os providers do core e colocalos no shared, e podemos importar o shared no modulo raiz com os providers e nos outros módulos(feature) sem os providers.
+ Dai criamos um método no módulo que retorna as configurações do nosso módulo mais os providers: 
+	static forRoot(): ModuleWithProviders { return { ngModule: SharedModule, providers: [ OrderService, RestaurantsService, ShoppingCartService ] } }
+ No imports do módulo raiz usamos SharedModule.forRoot() e nos outros usamos SharedModule.
+
+----- Realizando o Pré-Carregamento de Todos os Módulos
  

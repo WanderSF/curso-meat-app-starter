@@ -26,4 +26,12 @@ import { CommonModule } from '@angular/common';
     ],
     providers: [],
 })
-export class SharedModule { }
+export class SharedModule {
+    // Usa-se SharedModule.forRoot() no AppModule e apenas SharedModule nos outros
+    // static forRoot(): ModuleWithProviders {
+    //     return {
+    //         ngModule: SharedModule,
+    //         providers: [ OrderService, RestaurantsService, ShoppingCartService ]
+    //     }
+    // }
+ }
