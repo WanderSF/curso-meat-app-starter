@@ -1,5 +1,5 @@
-import { MEAT_API } from './../app.api';
-import { Restaurant } from './restaurant/restaurant.model';
+import { MEAT_API } from '../app.api';
+import { Restaurant } from '../restaurants/restaurant/restaurant.model';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';

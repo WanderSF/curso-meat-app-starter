@@ -1,4 +1,4 @@
-import { RestaurantsService } from './../../restaurants/restaurants.service';
+import { RestaurantsService } from '../../core/restaurants.service';
 import { MenuItem } from './../menu-item/menu-item.model';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';

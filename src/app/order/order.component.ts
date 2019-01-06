@@ -1,7 +1,7 @@
 import { ItemCart } from './../restaurant-detail/shopping-cart/item-cart.model';
 import { Component, OnInit } from '@angular/core';
 import { RadioOption } from 'app/shared/radio/radio-option.model';
-import { OrderService } from './order.service';
+import { OrderService } from '../core/order.service';
 import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';

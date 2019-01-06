@@ -435,4 +435,14 @@ Criar Componentes com Angular Elements (Angular 6)
  Fez as mesmas coisas que ao criar o feature module AboutModule na aula "Carregamento Tardio de Módulos (Lazy-Loading)". A diferença é que nesse caso importa o SharedModule no OrderModule criado.
 
 ----- Criando um Core Module com Serviços
+ Criou o modulo CoreModule na pasta core. Colocou os serviços da aplicação na lista de providers, importou o módulo no AppModule e retirou as referencias para os serviços: providers: [ OrderService, RestaurantsService, ShoppingCartService ]
+ Poderia colocar as classes dos serviços dentro da pasta core, mas prefiriu deixar onde estão para não mexer nos imports. Vou mudar pq o VS Code auxilia na refatoração.
+ Quando colocamos um serviço na lista de providers do modulo, estamos disponibilisando uma instância do serviço para ser injetada nos componentes. Eles funcionam como singletons.
+ Por padrão os providers não tem contexto, então msm que adicione um serviço na lista de provider de um modulo feature, ele estará disponível na lista de providers da aplicação.
+ Mas se estiver declarado na lista de providers de um módulo que sejá carregado tardiamente(Lazy-loading), então ele ganha um contexto separado do resto da aplicação, e os filhos daquele módulo irão acessar a instancia disponibilizada nesse módulo.
+ O problema é se tivessemos módulos que eram carregados juntos mas foram modificados para ser lazy-loading, podem parar de compartilhar dados entre partes da aplicação.
+ Acredito que como os providers eram singletons globais, ao fazer os carregamento tardio, esses providers podem ser novas instâncias de providers já existentes.
+ Dai seria necessário reestruturar a aplicação para corrigir o problema. Por isso é recomendado ciar um core module para ter todos os providers de serviços e esse módulo só ser importado no módulo raiz.
+
+----- Adicionando Serviços a um Módulo Compartilhado
  
