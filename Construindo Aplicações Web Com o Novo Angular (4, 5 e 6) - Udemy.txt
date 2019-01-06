@@ -427,4 +427,9 @@ Criar Componentes com Angular Elements (Angular 6)
  Criamos o arquivo about.routes que terá a rota padrão para o component: export const ABOUT_ROUTER: Routes = [ { path: '', component: AboutComponent } ];
 
 ----- Criando um Módulo Compartilhado
+ Criamos a classe SharedModule dentro da pasta shared, declaramos os componentes, importamos as dependências, sendo o CommonModule referente as diretivas, mas que no módulo raiz já é importado de forma implicita.
+ E exportamos os componentes e também os módulos importados, para que os outros módulos que utilizem o shared, não precisem importar tais módulos.
+ Por ultimos retiramos as referencias dos componentes e dos módulos do AppModule e importamos o SharedModule.
+
+----- Criando um Feature Module (Módulo de Compra)
  
