@@ -14,8 +14,11 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-sm-9 col-xs-12">
                     <p class="lead">Seus Dados:</p>
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    <span class="help-block pull-right has-error-block" *ngIf="orderForm.hasError('emailsNotMatch')"><i class="fa fa-remove"></i>Email-s não conferem!</span>
                 </div>
                 <div class="col-sm-6 col-xs-12">
                     <mt-input-container label="Nome" errorMessage="Campo obrigatório e com 5 caracteres!">
@@ -28,7 +31,7 @@
                     </mt-input-container>
                 </div>
                 <div class="col-sm-3 col-xs-6">
-                    <mt-input-container label="Confirmação de e-mail">
+                    <mt-input-container label="Confirmação de e-mail" errorMessage="E-mail inválido!">
                         <input type="text" class="form-control" formControlName="emailConfirmation" autocomplete="off" placeholder="Confirmação de e-mail">
                     </mt-input-container>
                 </div>

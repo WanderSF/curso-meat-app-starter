@@ -401,4 +401,10 @@ Criar Componentes com Angular Elements (Angular 6)
  name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]), email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)])
 
 ----- Criando Validadores Personalizados
- 
+ No segundo parametro do método group do formBuilder colocamos um objeto que tem um atributo validator e como valor o retorno de um método estatico que é uma chave e valor: { validator: OrderComponent.equalsTo }
+ Criamos o método para validação dos e-mails, onde group é o próprio grupo criado com o formGroup e retorna uma chave do tipo string e um valor boolean.
+	private static equalsTo(group: AbstractControl): {[key: string]: boolean} { const email = group.get('email');        const emailConfirmation = group.get('emailConfirmation');
+        if (!email || !emailConfirmation) { return undefined; } if (email.value !== emailConfirmation.value) { return { emailsNotMatch: true }; } return undefined; }
+ No template podemos verificar se está sendo lançado o atributo para mostrar a mensagem de validação: *ngIf="orderForm.hasError('emailsNotMatch')"
+
+----- 
