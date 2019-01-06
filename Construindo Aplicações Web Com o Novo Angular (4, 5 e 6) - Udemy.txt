@@ -27,12 +27,12 @@ Realizar Autenticação Simples em uma Aplicação Angular
 RxJS 6 e o novo operador "pipe" (Angular 6)
 Criar Componentes com Angular Elements (Angular 6)
 
------------------------------- Sessão 1 - Apresentação
+------------------------------ Seção 1 - Apresentação
 
 ----- Apresentação do curso
  Vamos utilizar recursos do Angular como componentes, diretivas e pipes. Aprender sobre modulos, consumir uma API REST, reactive programming e implementar formulários com template forms e reactive forms. Comunicação entre componentes e criação de componentes reutilizaveis e a integrar esses componentes com as diretivas de formulário do Angular. Introdução ao Typescript e utilizar a versão 4 do Angular.
 
------------------------------- Sessão 2 - Introdução
+------------------------------ Seção 2 - Introdução
 
 ----- Escolha da linguagem
  O Angular pode ser usado com as linguagens:
@@ -43,7 +43,7 @@ Criar Componentes com Angular Elements (Angular 6)
  Instalar o Angular-cli: npm install -g @angular/cli        - Ele vai ajudar a criar componentes, classes, services e outros. O -g informa q a instalação é global, ou seja, o angular cli não vai ficar disponível só na pasta de instalação.
  Para ver a versão instalada do angular-cli: ng -v
  
------------------------------- Sessão 3 - Vamos Falar Sobre Typescript
+------------------------------ Seção 3 - Vamos Falar Sobre Typescript
 
 ----- Declaração de variáveis
  let name: string
@@ -73,7 +73,7 @@ Criar Componentes com Angular Elements (Angular 6)
  Será adicionado a dependencia de desenvolvimento no arquivo package.json e é criado uma nova pasta dentro de node-modules com o novo conteudo.
  As "definições de tipos" são importantes pois com elas o compilador do typescript passa a conhecer a biblioteca e assim podemos usar o autocomplite e a verificação se  estamos passando os parametros corretos por exemplo.
 
------------------------------- Sessão 4 - Primeira Aplicação
+------------------------------ Seção 4 - Primeira Aplicação
 
 ----- Gerando a Primeira Aplicação
  Executar o seguinte comando para criar o projeto: ng new jedi-academy --prefix=jad
@@ -138,7 +138,7 @@ Criar Componentes com Angular Elements (Angular 6)
  Podemos também adicionar referencia a elementos do DOM ou a componentes com uma coisa chamada de variáveis de ambiente.
  Colocamos "#nomeDaReferencia" tendo da TAG e assim podemos utilizar essa referencia dentro do tamplete ou passar isso para um método caso necessário. Com essa referencia podemos acessar atributos e também métodos do elemento.
 
------------------------------- Sessão 5 - Projeto do Curso (Aplicação MEAT)
+------------------------------ Seção 5 - Projeto do Curso (Aplicação MEAT)
 
 ----- Baixando o projeto inicial
  https://github.com/cod3rcursos/meat-app-starter
@@ -263,7 +263,7 @@ Criar Componentes com Angular Elements (Angular 6)
  No modulo principal import o token LOCALE_ID junto do NgModule.
  Na lista de providers vamos alterar o valor da localização utilizando esse token: {provide: LOCALE_ID, useValeu: 'pt-BR'}
 
------------------------------- Sessão 6 - Formulários e Componentes Personalizados
+------------------------------ Seção 6 - Formulários e Componentes Personalizados
 
 ----- O que são Template Forms
  É uma forma declarativa de configurar os formulários no template do componente. A gente usa a diretiva NgModel nos inputs que devem ser controlados pelo angular.
@@ -374,7 +374,7 @@ Criar Componentes com Angular Elements (Angular 6)
  <i *ngFor="let r of ratings" class="fa" [class.fa-star]="r <= rate" [class.fa-star-o]="r > rate" (click)="setRate(r)" (mouseenter)="setTemporaryRate(r)" (mouseleave)="clearTemporaryRate()"></i>
  No template do OrderSummary colocamos o evento (rated)="rated = true" para que ao ser emitido, possamos mostrar a mensagem: <p [hidden]="!rated">Obrigado pela sua avaliação!</p>
 
------------------------------- Sessão 7 - Reactive Forms
+------------------------------ Seção 7 - Reactive Forms
 
 ----- O que são Reactive Forms
  A nova forma forma do Angular implementar formuários. Ao invés de usar NgModel e configurar validadores nos campos, vamos criar instancias de  FormGroup ou FormControl dentro de um componente.
@@ -407,4 +407,24 @@ Criar Componentes com Angular Elements (Angular 6)
         if (!email || !emailConfirmation) { return undefined; } if (email.value !== emailConfirmation.value) { return { emailsNotMatch: true }; } return undefined; }
  No template podemos verificar se está sendo lançado o atributo para mostrar a mensagem de validação: *ngIf="orderForm.hasError('emailsNotMatch')"
 
------ 
+------------------------------ Seção 8 - Módulos (Angular)
+
+----- O que são Módulos
+ Angular temos componentes, diretivas, pipes, router e serviços, então é necessário ter uma visão geral sobre esses aspectos e o poder do framework para então organizar o projeto em modulos.
+ Modulos Angular são itens de configuração do framework que servem para agregar componentes, diretivas, serviçõs ou pipes. 
+ Que permite melhor organização, definir o que será exportado para fora do modulo e como a injeção de dependência vai ser configurado. Com módulos, podemos dividir a aplicação em partes independêntes, o que permite fazer o Lazy Loading.
+ Tipos de módulos: - Temos o modulo raiz, o "root module", que vai ter a declaração dos componentes usados pela aplicação inteira. Esse é quem faz o bootstrap da aplicação. Para app pequenos podemos ter tudo no root module, mas conforme cresce, ficar melhor dividir em outros módulos.
+ 		   - Podemos ter um módulo "shared module", que vai ter todos os componentes usados por outros módulos da aplicação.
+		   - Podemos ter um módulo "core module" que vai ter todos o sserviços da aplicação. Esse módulo não tem componentes. Um módulo similar é o HTTP do próprio Angular.
+		   - Podemos ter os módulo "feature module", que são os módulos que terão a implementação das funcionalidades da aplicação.
+ Dessa forma temos um módulo "share" que tem componentes, diretivas e pipes. Temos os módulos "feature" com as funcionalidades e importam o módulo "shared". Temos o módulo "core" com os serviços e não importa nada da aplicação. E temos o módulo "root" que referencia o "core" e talvez os módulos features da aplicação.
+ Para declaração um módulo precisamos de uma classe associada ao decorator NgModel, muito similar ao módulo raiz, a diferença é que não tem bootstrap e precisa listar os componentes a serem visiveis fora do módulo em exports:
+	@NgModule({ declarations: [], imports: [], providers: [], exports: [] }) export class MyModule {}
+
+----- Carregamento Tardio de Módulos (Lazy-Loading)
+ No AppModule retiramos as referencias para o AboutComponent. No app.routes retiramos a rota para o AboutComponent e colocamos a rota para o carregamento do modulo criado: { path: 'about', loadChildren: './about/about.module#AboutModule' }
+ Criamos o AboutModule que tem a declaração do AboutComponent e importa as rotas do modulo: @NgModule({ declarations: [ AboutComponent ], imports: [ RouterModule.forChild(ABOUT_ROUTER) ] }) export class AboutModule { }
+ Criamos o arquivo about.routes que terá a rota padrão para o component: export const ABOUT_ROUTER: Routes = [ { path: '', component: AboutComponent } ];
+
+----- Criando um Módulo Compartilhado
+ 

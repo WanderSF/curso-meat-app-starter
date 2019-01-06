@@ -4,11 +4,9 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
 import { RestaurantsService } from './restaurants/restaurants.service';
@@ -29,34 +27,38 @@ import { RatingComponent } from './shared/rating/rating.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent,
-    AboutComponent,
-    RestaurantsComponent,
-    RestaurantComponent,
-    RestaurantDetailComponent,
-    MenuComponent,
-    ShoppingCartComponent,
-    MenuItemComponent,
-    ReviewsComponent,
-    OrderComponent,
-    InputComponent,
-    RadioComponent,
-    OrderItensComponent,
-    DeliveryCostsComponent,
-    OrderSummaryComponent,
-    RatingComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES)
-  ],
-  providers: [RestaurantsService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        HomeComponent,
+        RestaurantsComponent,
+        RestaurantComponent,
+        RestaurantDetailComponent,
+        MenuComponent,
+        ShoppingCartComponent,
+        MenuItemComponent,
+        ReviewsComponent,
+        OrderComponent,
+        InputComponent,
+        RadioComponent,
+        OrderItensComponent,
+        DeliveryCostsComponent,
+        OrderSummaryComponent,
+        RatingComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot(ROUTES)
+    ],
+    providers: [
+        RestaurantsService,
+        ShoppingCartService,
+        OrderService,
+        { provide: LOCALE_ID, useValue: 'pt-BR' }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
