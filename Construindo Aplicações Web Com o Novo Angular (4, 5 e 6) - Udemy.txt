@@ -432,4 +432,7 @@ Criar Componentes com Angular Elements (Angular 6)
  Por ultimos retiramos as referencias dos componentes e dos módulos do AppModule e importamos o SharedModule.
 
 ----- Criando um Feature Module (Módulo de Compra)
+ Fez as mesmas coisas que ao criar o feature module AboutModule na aula "Carregamento Tardio de Módulos (Lazy-Loading)". A diferença é que nesse caso importa o SharedModule no OrderModule criado.
+
+----- Criando um Core Module com Serviços
  

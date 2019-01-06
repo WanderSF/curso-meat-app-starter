@@ -15,13 +15,8 @@ import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shoppin
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-cart.service';
-import { OrderComponent } from './order/order.component';
-import { OrderItensComponent } from './order/order-itens/order-itens.component';
-import { OrderService } from './order/order.service';
-import { DeliveryCostsComponent } from './order/delivery-costs/delivery-costs.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { SharedModule } from './shared/shared.module';
-
 
 @NgModule({
     declarations: [
@@ -35,9 +30,6 @@ import { SharedModule } from './shared/shared.module';
         ShoppingCartComponent,
         MenuItemComponent,
         ReviewsComponent,
-        OrderComponent,
-        OrderItensComponent,
-        DeliveryCostsComponent,
         OrderSummaryComponent,
     ],
     imports: [
@@ -49,7 +41,6 @@ import { SharedModule } from './shared/shared.module';
     providers: [
         RestaurantsService,
         ShoppingCartService,
-        OrderService,
         { provide: LOCALE_ID, useValue: 'pt-BR' }
     ],
     bootstrap: [AppComponent]
