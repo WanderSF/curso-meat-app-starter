@@ -449,4 +449,8 @@ Criar Componentes com Angular Elements (Angular 6)
  No imports do módulo raiz usamos SharedModule.forRoot() e nos outros usamos SharedModule.
 
 ----- Realizando o Pré-Carregamento de Todos os Módulos
- 
+ Podemos otimizar o carregamento da aplicação ainda mais com uma estrategia chamada de preloading. Podemos ter módulos com lazy-loading, mas em alguns casos o módulo pode ser bem grande e demorar para ser carregado quando requisitado.
+ Com essa estratégia, o angular vai carregar os módulos lazy-loading em background, ou seja em outra thread logo após os modúlos eager serem carregados.
+ Então no AppModule aos importarmos as rotas, passamos a estrategia de carregamento: RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
+
+------------------------------ Seção 9 - 
